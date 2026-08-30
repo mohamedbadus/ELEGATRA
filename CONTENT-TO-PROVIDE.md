@@ -22,34 +22,40 @@ If the trading name is not exactly "Elegatra", search `index.html` for
 
 ## 3. Photographs — this is the big one
 
-**Every photograph on the site right now is a placeholder** pulled from Unsplash
-so the layout could be judged with real images in it. See
-`assets/img/CREDITS.md` for the full list, the source of each one, and the exact
-pixel size to match.
+**Every photograph on the site is a placeholder** from Unsplash, so the layout
+could be judged with real images in it. Full list, sources and sizes are in
+`assets/img/CREDITS.md`.
 
-Replace the file in `assets/img/` keeping the same filename and the site picks it
-up — no code change needed:
+Each slot ships at **two resolutions** (the browser picks one via `srcset`, so
+retina screens get the sharp file and phones do not download it). There is a
+script that makes both from one photo:
 
-| Slot | File | Ratio |
+```sh
+cd assets/img
+./resize.sh ~/Desktop/the-real-sevigne.jpg sevigne portrait
+./resize.sh ~/Desktop/showroom-wide.jpg    hero    wide
+```
+
+| Slot | Name to pass | Shape |
 | --- | --- | --- |
-| Hero background | `hero.jpg` | 16:10 landscape, 2000 × 1250 |
-| Sévigné Crystal | `sevigne.jpg` | 3:4 portrait, 1000 × 1333 |
-| Halle Brass Tier | `halle.jpg` | 3:4 portrait |
-| Murano Bloom | `murano.jpg` | 3:4 portrait |
-| Ledger Linear | `ledger.jpg` | 3:4 portrait |
-| Court Banquet | `court.jpg` | 3:4 portrait |
-| Ora Halo | `ora.jpg` | 3:4 portrait |
-| Full-bleed band | `band.jpg` | 5:3 landscape, 2000 × 1200 |
-| Service section | `g1.jpg`, `g2.jpg` | 3:4 portrait |
+| Hero background | `hero` | `wide` |
+| Full-bleed band | `band` | `wide` |
+| Sévigné Crystal | `sevigne` | `portrait` |
+| Halle Brass Tier | `halle` | `portrait` |
+| Murano Bloom | `murano` | `portrait` |
+| Ledger Linear | `ledger` | `portrait` |
+| Court Banquet | `court` | `portrait` |
+| Ora Halo | `ora` | `portrait` |
+| Service section | `g1`, `g2` | `portrait` |
+
+Keep the names and the site picks the new files up with no code change.
 
 **Shoot dark.** Fixture lit, room low. The page dims every photograph through a
 CSS filter, so a bright flat shot has nowhere to go when the dimmer comes down.
 
 Update the `alt` text on each `<img>` at the same time — it currently describes
-the placeholder.
-
-The six fixture names, descriptions and specs are placeholder copy written to
-show the layout. Swap them for the real stock.
+the placeholder. The six fixture names, descriptions and specs are placeholder
+copy too.
 
 ## 4. Contact details
 

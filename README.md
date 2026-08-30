@@ -54,6 +54,16 @@ are constant, so the copy stays readable at every setting.
   lifts line by line), scroll-scrubbed parallax on the two full-bleed photographs,
   staggered reveals, and hover states on every card.
 
+## Photography
+
+Every image is a placeholder from Unsplash — see `assets/img/CREDITS.md` for
+sources, the two sizes each slot needs, and `resize.sh`, which makes both from
+one photo using `sips`.
+
+Each slot ships at two resolutions and the browser picks one through `srcset`,
+so a retina display gets the sharp file (hero at 3200 px) and a phone does not
+download it.
+
 ## Libraries
 
 Three, all loaded from a CDN and **all optional**:
