@@ -205,11 +205,11 @@ body.scrolled .masthead{
 }
 /* shade under the copy, tied to the light */
 .hero__shade{
-  position:absolute; inset:auto 0 0 0; height:74%; z-index:1; pointer-events:none;
+  position:absolute; inset:auto 0 0 0; height:88%; z-index:1; pointer-events:none;
   background:linear-gradient(to top,
-    rgb(11 10 16 / .96) 0%, rgb(11 10 16 / .82) 30%,
-    rgb(11 10 16 / .40) 62%, transparent 100%);
-  opacity:calc(.18 + var(--lum) * .82);
+    rgb(11 10 16 / .97) 0%, rgb(11 10 16 / .92) 24%,
+    rgb(11 10 16 / .74) 44%, rgb(11 10 16 / .34) 72%, transparent 100%);
+  opacity:calc(.20 + var(--lum) * .80);
   transition:opacity .16s linear;
 }
 /* warm bloom over the fixture — grows with the dimmer */
@@ -479,14 +479,16 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
 /* the eyebrow lands on the brightest part of the fixture — give the whole
    text block a soft pool of shade to sit in */
 .band__body::before{
-  content:""; position:absolute; inset:-14% -10%; z-index:-1; pointer-events:none;
-  background:radial-gradient(58% 56% at 50% 50%,
-    rgb(11 10 16 / .88) 0%, rgb(11 10 16 / .62) 46%, transparent 74%);
-  opacity:calc(.34 + var(--lum) * .66);
+  content:""; position:absolute; inset:-28% -16%; z-index:-1; pointer-events:none;
+  background:radial-gradient(62% 60% at 50% 50%,
+    rgb(11 10 16 / .93) 0%, rgb(11 10 16 / .80) 40%,
+    rgb(11 10 16 / .46) 66%, transparent 84%);
+  opacity:calc(.40 + var(--lum) * .60);
   filter:blur(12px);
   transition:opacity .16s linear;
 }
-.band .eyebrow{ color:var(--brass-lt) }
+.band .eyebrow,
+.hero .eyebrow{ color:var(--candle) }
 .band__quote{
   font-family:var(--display); font-size:clamp(24px,3.6vw,48px);
   line-height:1.22; letter-spacing:-.012em; margin:0 0 26px;
@@ -673,9 +675,17 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
   .hero{ padding-bottom:clamp(178px,40vw,220px) }
   .foot__in{ padding-bottom:calc(clamp(38px,5vw,60px) + 152px) }
 
-  /* the dimmer owns the whole bottom edge here, so the button stacks
-     above it rather than beside it */
-  .wa{ bottom:94px; right:12px; padding:10px 13px; gap:8px }
+  /* the hint sits under the plate here, making the dimmer taller than the
+     gap left for it — which is what pushed WhatsApp onto the bar. The
+     docked bar is labelled and its slider is visible, so it has no job. */
+  .dimmer__hint{ display:none }
+  .dimmer{ bottom:calc(14px + env(safe-area-inset-bottom, 0px)) }
+
+  /* WhatsApp stacks above the bar, clear of the home indicator */
+  .wa{
+    bottom:calc(86px + env(safe-area-inset-bottom, 0px));
+    right:12px; padding:10px 13px; gap:8px;
+  }
   .wa__label{ font-size:10px; letter-spacing:.12em }
 }
 @media (max-width:560px){
