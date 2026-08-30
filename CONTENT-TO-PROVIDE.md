@@ -67,10 +67,14 @@ table and the floating button's `href`.
 
 ## 4. The map — done
 
-Pinned by the shop's own Google listing (place id `8230889101658034829`,
-26.84284 / 80.92809), restyled from Google's light tiles into the page's night
-palette. The contact table also carries a **Directions** row pointing at the
-Google Maps share link, which is the one that matters on a phone.
+Uses Google's own embed code for the shop's listing, restyled from Google's
+light tiles into the page's night palette. The contact table also carries a
+**Directions** row pointing at the Google Maps share link, which is the one that
+matters on a phone.
+
+To move the pin: Google Maps → the listing → Share → **Embed a map** → copy the
+`<iframe>` and replace the `src` in `index.html`. Keep the `title` attribute,
+which is what a screen reader announces.
 
 ## 5. Check the words are true
 
