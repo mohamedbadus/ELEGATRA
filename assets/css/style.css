@@ -141,7 +141,10 @@ body.scrolled .masthead{
 .brand{ display:flex; align-items:center; gap:11px; text-decoration:none;
   color:var(--brass); margin-right:auto }
 .brand__mark{ width:16px; height:22px; flex:none }
-.brand__img{ height:26px; width:auto }
+.brand__img{
+  height:34px; width:34px; object-fit:contain; flex:none;
+  mix-blend-mode:screen;
+}
 .brand__name{
   font-family:var(--display); font-size:clamp(17px,1.6vw,21px);
   letter-spacing:.26em; text-transform:uppercase; color:var(--linen);
@@ -405,11 +408,11 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
 
 /* ─── collection ────────────────────────────────────────── */
 .pieces{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(272px,1fr));
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(30px,3.4vw,56px) clamp(20px,2.6vw,40px);
 }
 /* the tier stagger — cards hang at two heights, like a two-tier fixture */
-.piece--offset{ margin-top:clamp(0px,5vw,76px) }
+.piece:nth-child(even){ margin-top:clamp(0px,5vw,76px) }
 
 .piece__frame{
   display:block; position:relative; overflow:hidden;
@@ -431,6 +434,11 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
 .piece__frame:hover{ border-color:var(--brass) }
 .piece__frame:hover img{ transform:scale(1.06) }
 .piece__frame:hover::after{ transform:translateX(130%) }
+
+/* per-photograph exposure, so one very dark and one very bright shot sit in
+   the same row as the rest instead of reading as a black card and a white one */
+.piece--dark img{ --lit-floor:.54; --lit-gain:1.06 }
+.piece--bright img{ --lit-floor:.16; --lit-gain:.60 }
 
 .piece__name{ font-size:clamp(21px,1.9vw,28px); line-height:1.2; margin-bottom:8px }
 .piece__note{ margin:0 0 18px; color:var(--linen-dim); font-size:14.5px; max-width:38ch }
@@ -633,6 +641,7 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
 }
 
 @media (max-width:1080px){
+  .pieces{ grid-template-columns:repeat(2,minmax(0,1fr)) }
   .service{ grid-template-columns:1fr }
   .service__shots{ grid-template-columns:repeat(2,1fr); grid-template-rows:auto }
   .service__shots img{ aspect-ratio:3/4; height:auto }
@@ -687,6 +696,10 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
     right:12px; padding:10px 13px; gap:8px;
   }
   .wa__label{ font-size:10px; letter-spacing:.12em }
+}
+@media (max-width:640px){
+  .pieces{ grid-template-columns:1fr }
+  .piece:nth-child(even){ margin-top:0 }
 }
 @media (max-width:560px){
   .service__shots{ grid-template-columns:1fr }

@@ -1,56 +1,64 @@
-# Placeholder photography
+# Images
 
-Every image here is a **temporary stand-in** from [Unsplash](https://unsplash.com),
-under the [Unsplash License](https://unsplash.com/license) — free for commercial
-use, no attribution required. They exist so the layout can be judged with real
-photographs in it. **Replace all of them before the site goes live.**
+## The logo
 
-## Two sizes per slot
+`logo.png`, `favicon.png` and `apple-touch-icon.png` are all made from the
+**Instagram profile picture** at
+[@akchandeliers](https://instagram.com/akchandeliers), which is only **150 × 150
+pixels**. That is enough for the 34px mark in the header and for a browser tab,
+but it is soft if used any larger.
 
-Each slot ships at two resolutions and the browser picks one via `srcset`, so a
-retina display gets the sharp file and a phone does not download it.
-
-| Slot | Files | Ratio |
-| --- | --- | --- |
-| Hero background | `hero-1600.jpg`, `hero-3200.jpg` | 8:5 landscape |
-| Full-bleed band | `band-1600.jpg`, `band-3200.jpg` | 8:5 landscape |
-| Sévigné Crystal | `sevigne-700.jpg`, `sevigne-1400.jpg` | 3:4 portrait |
-| Halle Brass Tier | `halle-700.jpg`, `halle-1400.jpg` | 3:4 portrait |
-| Murano Bloom | `murano-700.jpg`, `murano-1400.jpg` | 3:4 portrait |
-| Ledger Linear | `ledger-700.jpg`, `ledger-1400.jpg` | 3:4 portrait |
-| Court Banquet | `court-700.jpg`, `court-1400.jpg` | 3:4 portrait |
-| Ora Halo | `ora-700.jpg`, `ora-1400.jpg` | 3:4 portrait |
-| Service section | `g1-*.jpg`, `g2-*.jpg` | 3:4 portrait |
-
-## Making both sizes from one photograph
-
-`resize.sh` does it with `sips`, which is already on every Mac:
+**Ask the shop for the original logo artwork** — ideally an SVG or PDF from
+whoever designed it, otherwise the largest PNG they have. Drop it in as
+`logo.png` and regenerate the two icons:
 
 ```sh
 cd assets/img
-./resize.sh ~/Desktop/the-real-sevigne.jpg sevigne portrait
-./resize.sh ~/Desktop/showroom-wide.jpg    hero    wide
+cp logo.png favicon.png          && sips -s format png -z 64 64   favicon.png
+cp logo.png apple-touch-icon.png && sips -s format png -z 180 180 apple-touch-icon.png
 ```
 
-Keep the names exactly as above and the page picks them up with no code change.
+The logo is gold on black, and the page renders it with `mix-blend-mode:screen`
+so the black background drops out. A replacement with a transparent background
+works too; one on a *white* background will not — it would appear as a white box.
+
+## Photography — all placeholder
+
+Every photograph is a **temporary stand-in** from [Unsplash](https://unsplash.com)
+under the [Unsplash License](https://unsplash.com/license), free for commercial
+use with no attribution required. **Replace all of them with the shop's own
+stock before this is the real website.**
+
+Each slot ships at two or three sizes and the browser picks one via `srcset`, so
+a 4K screen gets the sharp file and a phone does not download it.
+
+| Slot | Files | Shape |
+| --- | --- | --- |
+| Hero background | `hero-1600` / `-2560` / `-3840` | 8:5 landscape |
+| Full-bleed band | `band-1600` / `-2560` / `-3840` | 8:5 landscape |
+| Chandeliers | `chandeliers-800` / `-1600` | 3:4 portrait |
+| Pendant lights | `pendants-800` / `-1600` | 3:4 portrait |
+| Wall lights | `wall-800` / `-1600` | 3:4 portrait |
+| Table lamps | `table-800` / `-1600` | 3:4 portrait |
+| Pedestal lamps | `pedestal-800` / `-1600` | 3:4 portrait |
+| Service section | `g1-*`, `g2-*` | 3:4 portrait |
+
+`resize.sh` makes every size from one photo using `sips`:
+
+```sh
+cd assets/img
+./resize.sh ~/Desktop/our-chandeliers.jpg chandeliers portrait
+./resize.sh ~/Desktop/showroom-wide.jpg   hero        wide
+```
 
 ## Shoot dark
 
 Fixture lit, room low. The page dims every photograph through a CSS filter, so a
-bright, flat, evenly-lit shot has nowhere to go when the dimmer comes down — and
-pale busy backgrounds fight the white type laid over them.
+bright, flat, evenly-lit shot has nowhere to go when the dimmer comes down.
 
-## Sources
-
-| File | Unsplash |
-| --- | --- |
-| `hero-*` | unsplash.com/photos/647dYgB4olI |
-| `band-*` | unsplash.com/photos/Uxjd-u0C8yM |
-| `sevigne-*` | unsplash.com/photos/0zERrbey8XM |
-| `halle-*` | unsplash.com/photos/PnGdZRc8w5Y |
-| `murano-*` | unsplash.com/photos/Kd6rg_7XHzc |
-| `ledger-*` | unsplash.com/photos/CzdrRlfRhok |
-| `court-*` | unsplash.com/photos/Z9g0j4GzrmE |
-| `ora-*` | unsplash.com/photos/vJ701Ia1z3A |
-| `g1-*` | unsplash.com/photos/iL9UGdhqgSg |
-| `g2-*` | unsplash.com/photos/vRs1id8Q1Vw |
+Two of the current placeholders needed individual correction, which shows what
+to avoid: the wall light was shot so dark it read as a black card, and the floor
+lamp was shot against a white wall and read as a white one. They carry
+`piece--dark` and `piece--bright` in `index.html`, which set a different
+exposure floor. **If the real photographs are shot consistently, delete those
+two classes** rather than adding more.
