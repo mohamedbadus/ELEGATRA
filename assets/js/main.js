@@ -143,7 +143,7 @@
 
   /* ── parallax on the two full-bleed photographs ─────── */
   if (hasST) {
-    [['.hero__img', '.hero', -9], ['.band__img', '.band', -13]].forEach(function (cfg) {
+    [['.hero__pan', '.hero', -9], ['.band__pan', '.band', -13]].forEach(function (cfg) {
       var img = document.querySelector(cfg[0]);
       var box = document.querySelector(cfg[1]);
       if (!img || !box) return;

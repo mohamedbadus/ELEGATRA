@@ -134,7 +134,7 @@ h1,h2,h3{ font-family:var(--display); font-weight:400; margin:0 }
 body.scrolled .masthead::before{ opacity:0 }
 body.scrolled .masthead{
   background:color-mix(in oklab, var(--ink) 84%, transparent);
-  backdrop-filter:blur(16px) saturate(1.3);
+  backdrop-filter:blur(9px) saturate(1.2);
   border-bottom-color:var(--hair);
 }
 
@@ -194,9 +194,23 @@ body.scrolled .masthead{
   overflow:hidden;
 }
 .hero__media{ position:absolute; inset:0; z-index:0 }
+/* only the pan wrapper moves; the filter stays on the image inside it, so
+   the browser caches one filtered raster instead of refiltering per frame */
+.hero__pan{
+  position:absolute; inset:0; will-change:transform;
+  transform:translateZ(0); backface-visibility:hidden;
+}
 .hero__img{
   width:100%; height:120%; object-fit:cover; object-position:50% 32%;
-  will-change:transform;
+}
+/* shade under the copy, tied to the light */
+.hero__shade{
+  position:absolute; inset:auto 0 0 0; height:74%; z-index:1; pointer-events:none;
+  background:linear-gradient(to top,
+    rgb(11 10 16 / .96) 0%, rgb(11 10 16 / .82) 30%,
+    rgb(11 10 16 / .40) 62%, transparent 100%);
+  opacity:calc(.18 + var(--lum) * .82);
+  transition:opacity .16s linear;
 }
 /* warm bloom over the fixture — grows with the dimmer */
 .hero__bloom{
@@ -292,7 +306,7 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
     color-mix(in oklab, var(--dusk) 96%, transparent),
     color-mix(in oklab, var(--ink) 96%, transparent));
   border:1px solid color-mix(in oklab, var(--brass) 52%, transparent);
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(8px);
   box-shadow:0 0 calc(var(--lum) * 44px) color-mix(in oklab, var(--candle) 14%, transparent);
   transition:box-shadow .16s linear;
 }
@@ -414,8 +428,12 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
   padding:clamp(70px,10vw,140px) var(--gutter);
 }
 .band__media{ position:absolute; inset:0; z-index:0 }
+.band__pan{
+  position:absolute; inset:0; will-change:transform;
+  transform:translateZ(0); backface-visibility:hidden;
+}
 .band__img{
-  width:100%; height:128%; object-fit:cover; will-change:transform;
+  width:100%; height:128%; object-fit:cover;
   --lit-floor:.56; --lit-gain:1.02;
 }
 .band__scrim{
@@ -436,9 +454,10 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
 .band__body::before{
   content:""; position:absolute; inset:-14% -10%; z-index:-1; pointer-events:none;
   background:radial-gradient(58% 56% at 50% 50%,
-    color-mix(in oklab, var(--ink) 76%, transparent) 0%,
-    color-mix(in oklab, var(--ink) 52%, transparent) 46%, transparent 74%);
+    rgb(11 10 16 / .88) 0%, rgb(11 10 16 / .62) 46%, transparent 74%);
+  opacity:calc(.34 + var(--lum) * .66);
   filter:blur(12px);
+  transition:opacity .16s linear;
 }
 .band .eyebrow{ color:var(--brass-lt) }
 .band__quote{
