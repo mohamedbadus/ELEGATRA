@@ -67,9 +67,10 @@ table and the floating button's `href`.
 
 ## 4. The map — done
 
-The showroom address is embedded from Google Maps and restyled to match the dark
-page. If the pin is not exactly on the shop front, send the Google Maps share
-link for the correct pin and it will be swapped in.
+Pinned by the shop's own Google listing (place id `8230889101658034829`,
+26.84284 / 80.92809), restyled from Google's light tiles into the page's night
+palette. The contact table also carries a **Directions** row pointing at the
+Google Maps share link, which is the one that matters on a phone.
 
 ## 5. Check the words are true
 
