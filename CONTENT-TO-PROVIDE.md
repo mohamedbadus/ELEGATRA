@@ -20,32 +20,36 @@ There is a second copy of the mark in the footer — replace it the same way.
 If the trading name is not exactly "Elegatra", search `index.html` for
 `brand__name` (2 places), the `<title>`, and the footer copyright line.
 
-## 3. Photographs — 6 fixtures
+## 3. Photographs — this is the big one
 
-Drop the images into `assets/img/`. Each card in the Collection section has a
-placeholder marked with `data-slot="…"` naming the filename it expects:
+**Every photograph on the site right now is a placeholder** pulled from Unsplash
+so the layout could be judged with real images in it. See
+`assets/img/CREDITS.md` for the full list, the source of each one, and the exact
+pixel size to match.
 
-| Card | File |
-| --- | --- |
-| Sévigné Crystal | `assets/img/sevigne.jpg` |
-| Halle Brass Tier | `assets/img/halle.jpg` |
-| Murano Bloom | `assets/img/murano.jpg` |
-| Ledger Linear | `assets/img/ledger.jpg` |
-| Court Banquet | `assets/img/court.jpg` |
-| Ora Halo | `assets/img/ora.jpg` |
+Replace the file in `assets/img/` keeping the same filename and the site picks it
+up — no code change needed:
 
-Replace each placeholder `<div>` with an `<img>`:
+| Slot | File | Ratio |
+| --- | --- | --- |
+| Hero background | `hero.jpg` | 16:10 landscape, 2000 × 1250 |
+| Sévigné Crystal | `sevigne.jpg` | 3:4 portrait, 1000 × 1333 |
+| Halle Brass Tier | `halle.jpg` | 3:4 portrait |
+| Murano Bloom | `murano.jpg` | 3:4 portrait |
+| Ledger Linear | `ledger.jpg` | 3:4 portrait |
+| Court Banquet | `court.jpg` | 3:4 portrait |
+| Ora Halo | `ora.jpg` | 3:4 portrait |
+| Full-bleed band | `band.jpg` | 5:3 landscape, 2000 × 1200 |
+| Service section | `g1.jpg`, `g2.jpg` | 3:4 portrait |
 
-```html
-<img class="piece__photo" src="assets/img/sevigne.jpg"
-     alt="Sévigné Crystal chandelier lit above a dining table" loading="lazy">
-```
+**Shoot dark.** Fixture lit, room low. The page dims every photograph through a
+CSS filter, so a bright flat shot has nowhere to go when the dimmer comes down.
 
-Shoot or crop them **portrait, 3:4** (e.g. 1200 × 1600). Dark room, fixture lit —
-they will sit on a near-black page.
+Update the `alt` text on each `<img>` at the same time — it currently describes
+the placeholder.
 
-The six names, descriptions and specs are placeholder copy written to show the
-layout. Swap them for the real fixtures he stocks.
+The six fixture names, descriptions and specs are placeholder copy written to
+show the layout. Swap them for the real stock.
 
 ## 4. Contact details
 

@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elegatra — Chandeliers, Showroom &amp; Installation</title>
-<meta name="description" content="Elegatra supplies, installs and maintains crystal, brass and contemporary chandeliers — from a single dining pendant to a full banquet hall ceiling.">
+<meta name="description" content="Elegatra supplies, installs and maintains crystal, brass and contemporary chandeliers — from a single dining pendant to a full banquet-hall ceiling.">
 <meta name="theme-color" content="#0B0A10">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/hero.jpg">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body id="top">
@@ -16,27 +17,29 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="masthead">
-  <a class="brand" href="#top" aria-label="Elegatra, home">
-    <!-- LOGO SLOT — replace this <svg> with: <img src="assets/img/logo.svg" alt="Elegatra" class="brand__img"> -->
-    <svg class="brand__mark" viewBox="0 0 24 32" aria-hidden="true">
-      <path d="M12 1 L21 12 L12 31 L3 12 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M12 1 L12 31 M3 12 L21 12" stroke="currentColor" stroke-width="0.6" opacity=".55"/>
-    </svg>
-    <span class="brand__name">Elegatra</span>
-  </a>
+  <div class="masthead__in">
+    <a class="brand" href="#top" aria-label="Elegatra, home">
+      <!-- LOGO SLOT — replace this <svg> with: <img src="assets/img/logo.svg" alt="Elegatra" class="brand__img"> -->
+      <svg class="brand__mark" viewBox="0 0 24 32" aria-hidden="true">
+        <path d="M12 1 L21 12 L12 31 L3 12 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M12 1 L12 31 M3 12 L21 12" stroke="currentColor" stroke-width=".6" opacity=".55"/>
+      </svg>
+      <span class="brand__name">Elegatra</span>
+    </a>
 
-  <nav class="nav" aria-label="Primary">
-    <a href="#collection">Collection</a>
-    <a href="#service">Service</a>
-    <a href="#process">Process</a>
-    <a href="#visit">Visit</a>
-  </nav>
+    <nav class="nav" aria-label="Primary">
+      <a href="#collection">Collection</a>
+      <a href="#service">Service</a>
+      <a href="#process">Process</a>
+      <a href="#visit">Visit</a>
+    </nav>
 
-  <a class="btn btn--ghost masthead__cta" href="#visit">Book a visit</a>
+    <a class="btn btn--solid masthead__cta" href="#visit">Book a visit</a>
 
-  <button class="burger" type="button" aria-expanded="false" aria-controls="mobilenav" aria-label="Open menu">
-    <span></span><span></span>
-  </button>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="mobilenav" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
 </header>
 
 <div class="mobilenav" id="mobilenav" hidden>
@@ -48,164 +51,51 @@
 
 <main id="main">
 
-  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <!-- ══════════ HERO ══════════ -->
   <section class="hero">
-    <div class="hero__glow" aria-hidden="true"></div>
-
-    <div class="hero__fixture" aria-hidden="true">
-      <svg class="chandelier" viewBox="0 0 600 560" role="img">
-        <defs>
-          <linearGradient id="brassG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#E7C67A"/>
-            <stop offset=".45" stop-color="#C39A4B"/>
-            <stop offset="1" stop-color="#6E5220"/>
-          </linearGradient>
-          <linearGradient id="crystalG" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#FFF6E4" stop-opacity=".95"/>
-            <stop offset=".5" stop-color="#BFD8DE" stop-opacity=".55"/>
-            <stop offset="1" stop-color="#8FA6B8" stop-opacity=".35"/>
-          </linearGradient>
-          <radialGradient id="flameG">
-            <stop offset="0" stop-color="#FFF7E0"/>
-            <stop offset=".45" stop-color="#FFD9A0"/>
-            <stop offset="1" stop-color="#FFB347" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="haloG">
-            <stop offset="0" stop-color="#FFD9A0" stop-opacity=".55"/>
-            <stop offset=".55" stop-color="#E9A94B" stop-opacity="0"/>
-            <stop offset="1" stop-color="#FFB347" stop-opacity="0"/>
-          </radialGradient>
-          <symbol id="drop" viewBox="0 0 12 30">
-            <path d="M6 0 L11 8 L6 30 L1 8 Z" fill="url(#crystalG)"/>
-            <path d="M6 0 L6 30" stroke="#FFF6E4" stroke-width=".7" opacity=".65"/>
-          </symbol>
-        </defs>
-
-        <!-- halo -->
-        <circle class="halo" cx="300" cy="250" r="270" fill="url(#haloG)"/>
-
-        <!-- canopy + chain -->
-        <g stroke="url(#brassG)" fill="none" stroke-width="3">
-          <path d="M300 16 V132"/>
-          <path d="M262 22 H338" stroke-width="7" stroke-linecap="round"/>
-        </g>
-        <ellipse cx="300" cy="22" rx="40" ry="9" fill="url(#brassG)"/>
-
-        <!-- column -->
-        <path d="M292 132 h16 l-4 176 h-8 z" fill="url(#brassG)"/>
-        <ellipse cx="300" cy="132" rx="16" ry="5" fill="#E7C67A" opacity=".8"/>
-
-        <!-- arms -->
-        <g class="arms" fill="none" stroke="url(#brassG)" stroke-width="4" stroke-linecap="round">
-          <path d="M300 304 C 368 304 424 276 456 216"/>
-          <path d="M300 304 C 340 300 372 266 392 202"/>
-          <path d="M300 304 L300 190"/>
-          <path d="M300 304 C 260 300 228 266 208 202"/>
-          <path d="M300 304 C 232 304 176 276 144 216"/>
-        </g>
-
-        <!-- candles -->
-        <g class="candles">
-          <g class="candle" style="--d:0s">
-            <rect x="449.5" y="182" width="13" height="34" rx="2" fill="#EDE7DC" opacity=".9"/>
-            <circle class="flameglow" cx="456" cy="172" r="34" fill="url(#flameG)"/>
-            <ellipse class="flame" cx="456" cy="171" rx="4.5" ry="9" fill="#FFF3D6"/>
-          </g>
-          <g class="candle" style="--d:.18s">
-            <rect x="385.5" y="168" width="13" height="34" rx="2" fill="#EDE7DC" opacity=".9"/>
-            <circle class="flameglow" cx="392" cy="158" r="34" fill="url(#flameG)"/>
-            <ellipse class="flame" cx="392" cy="157" rx="4.5" ry="9" fill="#FFF3D6"/>
-          </g>
-          <g class="candle" style="--d:.36s">
-            <rect x="293.5" y="156" width="13" height="34" rx="2" fill="#EDE7DC" opacity=".9"/>
-            <circle class="flameglow" cx="300" cy="146" r="38" fill="url(#flameG)"/>
-            <ellipse class="flame" cx="300" cy="145" rx="5" ry="10" fill="#FFF3D6"/>
-          </g>
-          <g class="candle" style="--d:.54s">
-            <rect x="201.5" y="168" width="13" height="34" rx="2" fill="#EDE7DC" opacity=".9"/>
-            <circle class="flameglow" cx="208" cy="158" r="34" fill="url(#flameG)"/>
-            <ellipse class="flame" cx="208" cy="157" rx="4.5" ry="9" fill="#FFF3D6"/>
-          </g>
-          <g class="candle" style="--d:.72s">
-            <rect x="137.5" y="182" width="13" height="34" rx="2" fill="#EDE7DC" opacity=".9"/>
-            <circle class="flameglow" cx="144" cy="172" r="34" fill="url(#flameG)"/>
-            <ellipse class="flame" cx="144" cy="171" rx="4.5" ry="9" fill="#FFF3D6"/>
-          </g>
-        </g>
-
-        <!-- tier rings -->
-        <g fill="none" stroke="url(#brassG)" stroke-width="3.5">
-          <ellipse cx="300" cy="250" rx="200" ry="34"/>
-          <ellipse cx="300" cy="380" rx="130" ry="24"/>
-          <ellipse cx="300" cy="470" rx="70" ry="14"/>
-        </g>
-
-        <!-- crystal drops, tier 1 -->
-        <g class="drops drops--1">
-          <use href="#drop" x="494" y="250" width="12" height="30"/>
-          <use href="#drop" x="487" y="259" width="12" height="30"/>
-          <use href="#drop" x="467" y="267" width="12" height="30"/>
-          <use href="#drop" x="435" y="274" width="12" height="30"/>
-          <use href="#drop" x="394" y="279" width="12" height="30"/>
-          <use href="#drop" x="346" y="283" width="12" height="30"/>
-          <use href="#drop" x="294" y="284" width="12" height="30"/>
-          <use href="#drop" x="242" y="283" width="12" height="30"/>
-          <use href="#drop" x="194" y="279" width="12" height="30"/>
-          <use href="#drop" x="153" y="274" width="12" height="30"/>
-          <use href="#drop" x="121" y="267" width="12" height="30"/>
-          <use href="#drop" x="101" y="259" width="12" height="30"/>
-          <use href="#drop" x="94"  y="250" width="12" height="30"/>
-        </g>
-
-        <!-- crystal drops, tier 2 -->
-        <g class="drops drops--2">
-          <use href="#drop" x="424" y="380" width="12" height="26"/>
-          <use href="#drop" x="414" y="389" width="12" height="26"/>
-          <use href="#drop" x="386" y="397" width="12" height="26"/>
-          <use href="#drop" x="344" y="402" width="12" height="26"/>
-          <use href="#drop" x="294" y="404" width="12" height="26"/>
-          <use href="#drop" x="244" y="402" width="12" height="26"/>
-          <use href="#drop" x="202" y="397" width="12" height="26"/>
-          <use href="#drop" x="174" y="389" width="12" height="26"/>
-          <use href="#drop" x="164" y="380" width="12" height="26"/>
-        </g>
-
-        <!-- crystal drops, tier 3 -->
-        <g class="drops drops--3">
-          <use href="#drop" x="364" y="470" width="12" height="22"/>
-          <use href="#drop" x="355" y="477" width="12" height="22"/>
-          <use href="#drop" x="329" y="482" width="12" height="22"/>
-          <use href="#drop" x="294" y="484" width="12" height="22"/>
-          <use href="#drop" x="259" y="482" width="12" height="22"/>
-          <use href="#drop" x="233" y="477" width="12" height="22"/>
-          <use href="#drop" x="224" y="470" width="12" height="22"/>
-        </g>
-
-        <!-- finial -->
-        <path d="M300 484 l9 14 -9 26 -9 -26 z" fill="url(#crystalG)"/>
-      </svg>
+    <div class="hero__media">
+      <img class="hero__img lit" src="assets/img/hero.jpg" alt="" fetchpriority="high" aria-hidden="true">
+      <div class="hero__bloom" aria-hidden="true"></div>
+      <div class="hero__scrim" aria-hidden="true"></div>
     </div>
 
-    <div class="hero__copy">
-      <p class="eyebrow">Chandeliers · Showroom &amp; installation</p>
-      <h1 class="hero__title">Light that <em>changes</em> the room, not just fills it.</h1>
-      <p class="hero__lede">Elegatra supplies, installs and maintains crystal, brass and contemporary chandeliers — from a single dining pendant to a full banquet-hall ceiling.</p>
-      <div class="hero__actions">
-        <a class="btn btn--solid" href="#visit">Book a showroom visit</a>
-        <a class="btn btn--ghost" href="#collection">See the collection</a>
+    <div class="hero__body">
+      <p class="eyebrow" data-fade>Chandeliers · Showroom &amp; installation</p>
+
+      <h1 class="hero__title">
+        <span class="line"><span>Light that</span></span>
+        <span class="line"><span><em>changes</em> the room,</span></span>
+        <span class="line"><span>not just fills it.</span></span>
+      </h1>
+
+      <div class="hero__foot">
+        <p class="hero__lede" data-fade>Elegatra supplies, installs and maintains crystal, brass and contemporary chandeliers — from a single dining pendant to a full banquet-hall ceiling.</p>
+        <div class="hero__actions" data-fade>
+          <a class="btn btn--solid" href="#visit">Book a showroom visit</a>
+          <a class="btn btn--ghost" href="#collection">See the collection</a>
+        </div>
       </div>
     </div>
 
-    <!-- SIGNATURE: the dimmer -->
-    <div class="dimmer">
-      <label class="dimmer__label" for="dim">Dimmer</label>
-      <input class="dimmer__rail" id="dim" type="range" min="8" max="100" value="62" step="1"
-             aria-describedby="dimread">
-      <output class="dimmer__read" id="dimread" for="dim">62%</output>
+    <!-- SIGNATURE: a working dimmer. It changes the real exposure of every
+         photograph on the page, the way the showroom dimmer changes the room. -->
+    <div class="dimmer" data-fade>
+      <span class="dimmer__hint" id="dimhint">Try the dimmer</span>
+      <div class="dimmer__plate">
+        <label class="dimmer__label" for="dim">Dimmer</label>
+        <div class="dimmer__slot">
+          <input class="dimmer__rail" id="dim" type="range" min="6" max="100" value="58" step="1" aria-describedby="dimread">
+        </div>
+        <output class="dimmer__read" id="dimread" for="dim"><b>58%</b><i>1740 lm</i></output>
+      </div>
     </div>
+
+    <a class="cue" href="#collection" aria-label="Scroll to the collection">
+      <span></span>
+    </a>
   </section>
 
-  <!-- ───────────────────────── TICKER ───────────────────────── -->
+  <!-- ══════════ TICKER ══════════ -->
   <div class="ticker" aria-hidden="true">
     <div class="ticker__track">
       <span>Lead crystal</span><i>◆</i><span>K9 optical</span><i>◆</i><span>Hand-blown Murano</span><i>◆</i><span>Antique brass</span><i>◆</i><span>Bohemian cut</span><i>◆</i><span>2200 K – 3000 K</span><i>◆</i><span>Dimmable drivers</span><i>◆</i><span>Load-rated fixing</span><i>◆</i>
@@ -213,119 +103,126 @@
     </div>
   </div>
 
-  <!-- ───────────────────────── COLLECTION ───────────────────────── -->
+  <!-- ══════════ COLLECTION ══════════ -->
   <section class="section" id="collection">
     <header class="section__head" data-reveal>
       <p class="eyebrow">The collection</p>
       <h2 class="section__title">Six ceilings, six answers</h2>
-      <p class="section__lede">Every piece is quoted with its drop length cut to your ceiling height. Ask for a room photo and we will show you the fixture in place before you commit.</p>
+      <p class="section__lede">Every piece is quoted with its drop length cut to your ceiling height. Send a photo of the room and we will show you the fixture in place before you commit.</p>
     </header>
 
     <div class="pieces">
-      <!-- PHOTO SLOT: swap each .piece__photo div for <img src="assets/img/sevigne.jpg" alt="…" class="piece__photo"> -->
       <article class="piece" data-reveal>
-        <div class="piece__photo" data-slot="sevigne.jpg"><span>Photo</span></div>
+        <a class="piece__frame" href="#visit"><img class="lit" src="assets/img/sevigne.jpg" alt="Sévigné Crystal chandelier, hand-cut drops on a brass frame" loading="lazy"></a>
         <h3 class="piece__name">Sévigné Crystal</h3>
         <p class="piece__note">The classical dining-room chandelier. Hand-cut drops, brass frame, warm enough to sit under for three hours.</p>
         <dl class="spec">
-          <div><dt>Arms</dt><dd>12</dd></div>
-          <div><dt>Drop</dt><dd>900 mm</dd></div>
-          <div><dt>Colour</dt><dd>2700 K</dd></div>
-          <div><dt>Material</dt><dd>Lead crystal</dd></div>
+          <div><dt>Arms</dt><dd>12</dd></div><div><dt>Drop</dt><dd>900 mm</dd></div>
+          <div><dt>Colour</dt><dd>2700 K</dd></div><div><dt>Material</dt><dd>Lead crystal</dd></div>
         </dl>
       </article>
 
       <article class="piece piece--offset" data-reveal>
-        <div class="piece__photo" data-slot="halle.jpg"><span>Photo</span></div>
+        <a class="piece__frame" href="#visit"><img class="lit" src="assets/img/halle.jpg" alt="Halle Brass Tier chandelier in unlacquered brass" loading="lazy"></a>
         <h3 class="piece__name">Halle Brass Tier</h3>
         <p class="piece__note">Three tiers of unlacquered brass that darken with age. Built for stairwells and double-height entrances.</p>
         <dl class="spec">
-          <div><dt>Arms</dt><dd>18</dd></div>
-          <div><dt>Drop</dt><dd>1400 mm</dd></div>
-          <div><dt>Colour</dt><dd>2400 K</dd></div>
-          <div><dt>Material</dt><dd>Antique brass</dd></div>
+          <div><dt>Arms</dt><dd>18</dd></div><div><dt>Drop</dt><dd>1400 mm</dd></div>
+          <div><dt>Colour</dt><dd>2400 K</dd></div><div><dt>Material</dt><dd>Antique brass</dd></div>
         </dl>
       </article>
 
       <article class="piece" data-reveal>
-        <div class="piece__photo" data-slot="murano.jpg"><span>Photo</span></div>
+        <a class="piece__frame" href="#visit"><img class="lit" src="assets/img/murano.jpg" alt="Murano Bloom chandelier in hand-blown glass" loading="lazy"></a>
         <h3 class="piece__name">Murano Bloom</h3>
         <p class="piece__note">Glass blown on the lamp, petal by petal. No two arms are identical, and that is the point.</p>
         <dl class="spec">
-          <div><dt>Arms</dt><dd>9</dd></div>
-          <div><dt>Drop</dt><dd>750 mm</dd></div>
-          <div><dt>Colour</dt><dd>2700 K</dd></div>
-          <div><dt>Material</dt><dd>Hand-blown glass</dd></div>
+          <div><dt>Arms</dt><dd>9</dd></div><div><dt>Drop</dt><dd>750 mm</dd></div>
+          <div><dt>Colour</dt><dd>2700 K</dd></div><div><dt>Material</dt><dd>Hand-blown glass</dd></div>
         </dl>
       </article>
 
       <article class="piece piece--offset" data-reveal>
-        <div class="piece__photo" data-slot="ledger.jpg"><span>Photo</span></div>
+        <a class="piece__frame" href="#visit"><img class="lit" src="assets/img/ledger.jpg" alt="Ledger Linear pendant over a dining table" loading="lazy"></a>
         <h3 class="piece__name">Ledger Linear</h3>
         <p class="piece__note">A long bar for a long table. Sits close to the ceiling, so nobody loses their sightline across dinner.</p>
         <dl class="spec">
-          <div><dt>Lamps</dt><dd>6</dd></div>
-          <div><dt>Drop</dt><dd>320 mm</dd></div>
-          <div><dt>Colour</dt><dd>3000 K</dd></div>
-          <div><dt>Material</dt><dd>Brushed bronze</dd></div>
+          <div><dt>Lamps</dt><dd>6</dd></div><div><dt>Drop</dt><dd>320 mm</dd></div>
+          <div><dt>Colour</dt><dd>3000 K</dd></div><div><dt>Material</dt><dd>Brushed bronze</dd></div>
         </dl>
       </article>
 
       <article class="piece" data-reveal>
-        <div class="piece__photo" data-slot="court.jpg"><span>Photo</span></div>
+        <a class="piece__frame" href="#visit"><img class="lit" src="assets/img/court.jpg" alt="Court Banquet chandelier in a grand hall" loading="lazy"></a>
         <h3 class="piece__name">Court Banquet</h3>
         <p class="piece__note">Our largest fixture. Installed on a motorised winch so it can be lowered for cleaning without scaffolding.</p>
         <dl class="spec">
-          <div><dt>Arms</dt><dd>36</dd></div>
-          <div><dt>Drop</dt><dd>2200 mm</dd></div>
-          <div><dt>Colour</dt><dd>2200 K</dd></div>
-          <div><dt>Material</dt><dd>Faceted crystal</dd></div>
+          <div><dt>Arms</dt><dd>36</dd></div><div><dt>Drop</dt><dd>2200 mm</dd></div>
+          <div><dt>Colour</dt><dd>2200 K</dd></div><div><dt>Material</dt><dd>Faceted crystal</dd></div>
         </dl>
       </article>
 
       <article class="piece piece--offset" data-reveal>
-        <div class="piece__photo" data-slot="ora.jpg"><span>Photo</span></div>
+        <a class="piece__frame" href="#visit"><img class="lit" src="assets/img/ora.jpg" alt="Ora Halo, a continuous LED ring in matte champagne" loading="lazy"></a>
         <h3 class="piece__name">Ora Halo</h3>
         <p class="piece__note">One continuous LED ring in matte champagne. The contemporary option when crystal would fight the room.</p>
         <dl class="spec">
-          <div><dt>Source</dt><dd>LED ring</dd></div>
-          <div><dt>Drop</dt><dd>500 mm</dd></div>
-          <div><dt>Colour</dt><dd>2700 K</dd></div>
-          <div><dt>Material</dt><dd>Matte champagne</dd></div>
+          <div><dt>Source</dt><dd>LED ring</dd></div><div><dt>Drop</dt><dd>500 mm</dd></div>
+          <div><dt>Colour</dt><dd>2700 K</dd></div><div><dt>Material</dt><dd>Matte champagne</dd></div>
         </dl>
       </article>
     </div>
   </section>
 
-  <!-- ───────────────────────── SERVICE ───────────────────────── -->
-  <section class="section section--service" id="service">
+  <!-- ══════════ PARALLAX BAND ══════════ -->
+  <section class="band" aria-labelledby="bandtitle">
+    <div class="band__media">
+      <img class="band__img lit" src="assets/img/band.jpg" alt="" loading="lazy" aria-hidden="true">
+      <div class="band__scrim" aria-hidden="true"></div>
+    </div>
+    <div class="band__body">
+      <p class="eyebrow" data-reveal>Why the dimmer matters</p>
+      <p class="band__quote" id="bandtitle" data-reveal>A chandelier is not one light. It is <em>forty</em> small ones, and the whole job is deciding how many of them you want tonight.</p>
+      <p class="band__by" data-reveal>Drag the dimmer — every photograph on this page is lit by it.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ SERVICE ══════════ -->
+  <section class="section" id="service">
     <header class="section__head" data-reveal>
       <p class="eyebrow">What we handle</p>
       <h2 class="section__title">A chandelier is a ceiling job before it is a light</h2>
       <p class="section__lede">Buying the fixture is the easy half. We do the part that keeps it on the ceiling and keeps it looking new.</p>
     </header>
 
-    <div class="cards">
-      <article class="card" data-reveal>
-        <h3>Ceiling survey &amp; load rating</h3>
-        <p>We check the slab, the hook and the true weight before quoting. If the ceiling needs a backing plate, that is in the quote, not a surprise on install day.</p>
-      </article>
-      <article class="card" data-reveal>
-        <h3>Wiring, dimming &amp; drivers</h3>
-        <p>Matched dimmers and drivers so the light fades smoothly instead of flickering or dropping out at the bottom of the range.</p>
-      </article>
-      <article class="card" data-reveal>
-        <h3>Assembly and installation</h3>
-        <p>Our own crew assembles on site, hangs the frame, then dresses every crystal by hand. Packing and debris leave with us.</p>
-      </article>
-      <article class="card" data-reveal>
-        <h3>Cleaning &amp; restoration</h3>
-        <p>Annual cleaning, rewiring, and replacement of chipped drops — including fixtures we did not supply.</p>
-      </article>
+    <div class="service">
+      <div class="cards">
+        <article class="card" data-reveal>
+          <h3>Ceiling survey &amp; load rating</h3>
+          <p>We check the slab, the hook and the true weight before quoting. If the ceiling needs a backing plate, that is in the quote, not a surprise on install day.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Wiring, dimming &amp; drivers</h3>
+          <p>Matched dimmers and drivers so the light fades smoothly instead of flickering or dropping out at the bottom of the range.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Assembly and installation</h3>
+          <p>Our own crew assembles on site, hangs the frame, then dresses every crystal by hand. Packing and debris leave with us.</p>
+        </article>
+        <article class="card" data-reveal>
+          <h3>Cleaning &amp; restoration</h3>
+          <p>Annual cleaning, rewiring, and replacement of chipped drops — including fixtures we did not supply.</p>
+        </article>
+      </div>
+
+      <figure class="service__shots" data-reveal>
+        <img class="lit" src="assets/img/g1.jpg" alt="A multi-tiered crystal fixture seen from below" loading="lazy">
+        <img class="lit" src="assets/img/g2.jpg" alt="A chandelier lit against a painted ceiling" loading="lazy">
+      </figure>
     </div>
   </section>
 
-  <!-- ───────────────────────── PROCESS ───────────────────────── -->
+  <!-- ══════════ PROCESS ══════════ -->
   <section class="section" id="process">
     <header class="section__head" data-reveal>
       <p class="eyebrow">How it runs</p>
@@ -351,7 +248,7 @@
     </ol>
   </section>
 
-  <!-- ───────────────────────── VISIT / CONTACT ───────────────────────── -->
+  <!-- ══════════ VISIT / CONTACT ══════════ -->
   <section class="section visit" id="visit">
     <div class="visit__inner">
       <div class="visit__lead" data-reveal>
@@ -359,37 +256,25 @@
         <h2 class="section__title">Come and stand under one</h2>
         <p class="section__lede">Photographs flatten crystal. Twenty minutes in the showroom, with the dimmer in your hand, settles it.</p>
 
-        <!-- CONTACT DETAILS — replace the placeholder values below -->
+        <!-- CONTACT DETAILS — replace the values in square brackets -->
         <dl class="contact">
-          <div class="contact__row">
-            <dt>Showroom</dt>
-            <dd>[Shop address, line 1]<br>[Area, City — PIN]</dd>
-          </div>
-          <div class="contact__row">
-            <dt>Phone</dt>
-            <dd><a href="tel:+910000000000">[+91 00000 00000]</a></dd>
-          </div>
-          <div class="contact__row">
-            <dt>WhatsApp</dt>
-            <dd><a href="https://wa.me/910000000000" target="_blank" rel="noopener">[+91 00000 00000]</a></dd>
-          </div>
-          <div class="contact__row">
-            <dt>Email</dt>
-            <dd><a href="mailto:hello@example.com">[hello@elegatra.com]</a></dd>
-          </div>
-          <div class="contact__row">
-            <dt>Instagram</dt>
-            <dd><a href="https://instagram.com/" target="_blank" rel="noopener">[@elegatra]</a></dd>
-          </div>
-          <div class="contact__row">
-            <dt>Hours</dt>
-            <dd>[Mon–Sat, 10:00 – 20:00]<br>[Sunday, by appointment]</dd>
-          </div>
+          <div class="contact__row"><dt>Showroom</dt>
+            <dd>[Shop address, line 1]<br>[Area, City — PIN]</dd></div>
+          <div class="contact__row"><dt>Phone</dt>
+            <dd><a href="tel:+910000000000">[+91 00000 00000]</a></dd></div>
+          <div class="contact__row"><dt>WhatsApp</dt>
+            <dd><a href="https://wa.me/910000000000" target="_blank" rel="noopener">[+91 00000 00000]</a></dd></div>
+          <div class="contact__row"><dt>Email</dt>
+            <dd><a href="mailto:hello@example.com">[hello@elegatra.com]</a></dd></div>
+          <div class="contact__row"><dt>Instagram</dt>
+            <dd><a href="https://instagram.com/" target="_blank" rel="noopener">[@elegatra]</a></dd></div>
+          <div class="contact__row"><dt>Hours</dt>
+            <dd>[Mon–Sat, 10:00 – 20:00]<br>[Sunday, by appointment]</dd></div>
         </dl>
       </div>
 
       <div class="visit__map" data-reveal>
-        <!-- MAP SLOT: paste the Google Maps embed <iframe> here, then delete this placeholder -->
+        <!-- MAP SLOT: paste the Google Maps embed <iframe> here, replacing this block -->
         <div class="mapslot">
           <span>Map</span>
           <p>Paste the Google&nbsp;Maps embed here</p>
@@ -400,17 +285,22 @@
 </main>
 
 <footer class="foot">
-  <div class="foot__brand">
-    <svg class="brand__mark" viewBox="0 0 24 32" aria-hidden="true">
-      <path d="M12 1 L21 12 L12 31 L3 12 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M12 1 L12 31 M3 12 L21 12" stroke="currentColor" stroke-width="0.6" opacity=".55"/>
-    </svg>
-    <span class="brand__name">Elegatra</span>
+  <div class="foot__in">
+    <div class="foot__brand">
+      <svg class="brand__mark" viewBox="0 0 24 32" aria-hidden="true">
+        <path d="M12 1 L21 12 L12 31 L3 12 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M12 1 L12 31 M3 12 L21 12" stroke="currentColor" stroke-width=".6" opacity=".55"/>
+      </svg>
+      <span class="brand__name">Elegatra</span>
+    </div>
+    <p class="foot__line">Chandeliers — supply, installation, aftercare.</p>
+    <p class="foot__line foot__line--dim">© <span id="yr">2026</span> Elegatra. Photography is placeholder.</p>
   </div>
-  <p class="foot__line">Chandeliers, supply and installation.</p>
-  <p class="foot__line foot__line--dim">© <span id="yr">2026</span> Elegatra. All rights reserved.</p>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
