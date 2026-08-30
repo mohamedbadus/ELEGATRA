@@ -47,28 +47,29 @@ the `alt` text on each `<img>` at the same time — it describes the placeholder
 **Shoot dark.** Fixture lit, room low, and keep the exposure consistent between
 shots. A bright flat photograph has nowhere to go when the dimmer comes down.
 
-## 3. Contact details
+## 3. Contact details — done
 
-One block in `index.html` — search for `<!-- CONTACT DETAILS`. Replace the
-values in square brackets:
+Taken from the shop's own Instagram post of 13 April 2023 and now live:
 
-- Showroom address
-- Phone — update **both** the visible text and `href="tel:+91…"`
-- WhatsApp — the text and `href="https://wa.me/91…"` (digits only, no `+`, no spaces)
-- Email
-- Opening hours
+- **Showroom** — 1, Shivaji Marg, Hewett Road, Lucknow, Uttar Pradesh
+- **Phone** — +91 96957 77774 and +91 78609 23324
+- **WhatsApp** — +91 96957 77774 (the floating button uses this too)
+- **Instagram** — [@akchandeliers](https://instagram.com/akchandeliers)
 
-Instagram is already correct: [@akchandeliers](https://instagram.com/akchandeliers).
+Two rows were left out because nothing confirms them. Send them and they go in:
 
-**The floating WhatsApp button holds a second copy of the number.** Search for
-`<!-- WHATSAPP` near the bottom of `index.html` and change that `href` too, or
-the button will message nobody. Its pre-filled message can be reworded there.
+- **Opening hours**
+- **An email address**
 
-## 4. The map
+One assumption to check: **WhatsApp is set to the first number.** If enquiries
+should go to 78609 23324 instead, say so — it appears in two places, the contact
+table and the floating button's `href`.
 
-Google Maps → find the shop → Share → **Embed a map** → copy the `<iframe>`.
-Paste it in place of the `<div class="mapslot">` block. It is already styled to
-match the dark page.
+## 4. The map — done
+
+The showroom address is embedded from Google Maps and restyled to match the dark
+page. If the pin is not exactly on the shop front, send the Google Maps share
+link for the correct pin and it will be swapped in.
 
 ## 5. Check the words are true
 
