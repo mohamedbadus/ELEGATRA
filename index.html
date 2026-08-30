@@ -11,6 +11,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero-1600.jpg" imagesrcset="assets/img/hero-1600.jpg 1600w, assets/img/hero-3200.jpg 3200w" imagesizes="100vw">
 <link rel="stylesheet" href="assets/css/style.css">
+<script>
+/* Arms the intro before first paint, runs it once the page is ready, and
+   always disarms afterwards — so a stalled or cancelled animation can never
+   leave the hero copy invisible. No JS at all means no intro and full copy. */
+(function () {
+  var d = document.documentElement;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('intro');
+  var played = false, settled = false;
+  function play()   { if (!played)  { played = true;  d.classList.add('intro-play'); } }
+  function settle() { if (!settled) { settled = true; d.classList.remove('intro', 'intro-play'); } }
+  if (document.readyState === 'complete') play();
+  else addEventListener('load', play, { once: true });
+  setTimeout(play, 2200);
+  setTimeout(settle, 5000);
+})();
+</script>
 </head>
 <body id="top">
 
@@ -189,7 +206,7 @@
   </section>
 
   <!-- ══════════ PARALLAX BAND ══════════ -->
-  <section class="band" aria-labelledby="bandtitle">
+  <section class="band" id="band" aria-labelledby="bandtitle">
     <div class="band__media">
       <img class="band__img lit" src="assets/img/band-1600.jpg"
            srcset="assets/img/band-1600.jpg 1600w, assets/img/band-3200.jpg 3200w"
@@ -246,7 +263,7 @@
   <section class="section" id="process">
     <header class="section__head" data-reveal>
       <p class="eyebrow">How it runs</p>
-      <h2 class="section__title">From first visit to first switch-on</h2>
+      <h2 class="section__title">From first visit to first switch‑on</h2>
     </header>
 
     <ol class="steps">

@@ -50,11 +50,14 @@ body{
 img{ max-width:100%; display:block }
 ::selection{ background:var(--brass); color:var(--ink) }
 
-/* every photograph is exposed by the dimmer */
+/* every photograph is exposed by the dimmer; the floor is per-image,
+   because a dark photograph needs more headroom than a bright one */
 .lit{
+  --lit-floor:.34;
+  --lit-gain:.88;
   filter:
-    brightness(calc(.30 + var(--lum) * .92))
-    saturate(calc(.55 + var(--lum) * .60))
+    brightness(calc(var(--lit-floor) + var(--lum) * var(--lit-gain)))
+    saturate(calc(.58 + var(--lum) * .56))
     contrast(calc(.92 + var(--lum) * .16));
   transition:filter .16s linear;
 }
@@ -80,6 +83,7 @@ h1,h2,h3{ font-family:var(--display); font-weight:400; margin:0 }
 .section__title{
   font-size:clamp(30px,4.4vw,58px); line-height:1.06;
   letter-spacing:-.015em; margin:0 0 20px;
+  text-wrap:balance;
 }
 .section__lede{
   margin:0; max-width:56ch; color:var(--linen-dim);
@@ -265,11 +269,21 @@ body.scrolled .masthead{
   z-index:95; display:flex; align-items:center; gap:12px;
 }
 .dimmer__hint{
+  display:flex; align-items:center; gap:9px;
   font-family:var(--mono); font-size:10px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--brass); white-space:nowrap;
+  text-transform:uppercase; color:var(--brass-lt); white-space:nowrap;
+  padding:6px 10px;
+  background:color-mix(in oklab, var(--ink) 82%, transparent);
+  border:1px solid color-mix(in oklab, var(--brass) 34%, transparent);
+  backdrop-filter:blur(8px);
+  animation:breathe 3.4s ease-in-out infinite;
   transition:opacity .6s ease;
 }
-body.dim-touched .dimmer__hint{ opacity:0 }
+.dimmer__hint::after{
+  content:""; width:20px; height:1px; background:var(--brass); flex:none;
+}
+@keyframes breathe{ 0%,100%{ opacity:.62 } 50%{ opacity:1 } }
+body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
 
 .dimmer__plate{
   display:flex; flex-direction:column; align-items:center; gap:12px;
@@ -400,19 +414,31 @@ body.dim-touched .dimmer__hint{ opacity:0 }
   padding:clamp(70px,10vw,140px) var(--gutter);
 }
 .band__media{ position:absolute; inset:0; z-index:0 }
-.band__img{ width:100%; height:128%; object-fit:cover; will-change:transform }
+.band__img{
+  width:100%; height:128%; object-fit:cover; will-change:transform;
+  --lit-floor:.56; --lit-gain:1.02;
+}
 .band__scrim{
   position:absolute; inset:0;
   background:
-    radial-gradient(62% 54% at 50% 48%,
-      color-mix(in oklab, var(--ink) 72%, transparent),
-      color-mix(in oklab, var(--ink) 94%, transparent) 100%),
+    radial-gradient(66% 58% at 50% 48%,
+      color-mix(in oklab, var(--ink) 26%, transparent),
+      color-mix(in oklab, var(--ink) 76%, transparent) 100%),
     linear-gradient(to bottom, var(--ink),
-      color-mix(in oklab, var(--ink) 46%, transparent) 22%,
-      color-mix(in oklab, var(--ink) 46%, transparent) 78%, var(--ink));
+      color-mix(in oklab, var(--ink) 10%, transparent) 20%,
+      color-mix(in oklab, var(--ink) 10%, transparent) 80%, var(--ink));
 }
 .band__body{
   position:relative; z-index:2; max-width:900px; text-align:center;
+}
+/* the eyebrow lands on the brightest part of the fixture — give the whole
+   text block a soft pool of shade to sit in */
+.band__body::before{
+  content:""; position:absolute; inset:-14% -10%; z-index:-1; pointer-events:none;
+  background:radial-gradient(58% 56% at 50% 50%,
+    color-mix(in oklab, var(--ink) 76%, transparent) 0%,
+    color-mix(in oklab, var(--ink) 52%, transparent) 46%, transparent 74%);
+  filter:blur(12px);
 }
 .band .eyebrow{ color:var(--brass-lt) }
 .band__quote{
@@ -516,25 +542,32 @@ body.dim-touched .dimmer__hint{ opacity:0 }
 .foot__line--dim{ color:color-mix(in oklab, var(--linen) 36%, transparent) }
 
 /* ─── reveals ───────────────────────────────────────────── */
+.reveal-ready [data-reveal]{ opacity:0; transform:translateY(28px) }
 [data-reveal]{
-  opacity:0; transform:translateY(28px);
   transition:opacity .85s var(--ease), transform .85s var(--ease);
   transition-delay:var(--rd,0ms);
 }
-[data-reveal].is-in{ opacity:1; transform:none }
+.reveal-ready [data-reveal].is-in{ opacity:1; transform:none }
 
-/* ─── page load sequence ────────────────────────────────── */
-.hero__media{ animation:sink 1.9s var(--ease) both }
-.hero__title .line > span{ animation:lift 1.05s var(--ease) both }
-.hero__title .line:nth-child(1) > span{ animation-delay:.30s }
-.hero__title .line:nth-child(2) > span{ animation-delay:.42s }
-.hero__title .line:nth-child(3) > span{ animation-delay:.54s }
-[data-fade]{ animation:rise .9s var(--ease) both }
-.hero .eyebrow[data-fade]{ animation-delay:.18s }
-.hero__lede[data-fade]{ animation-delay:.70s }
-.hero__actions[data-fade]{ animation-delay:.80s }
-.dimmer[data-fade]{ animation-delay:1.05s }
-.cue{ animation:rise .9s var(--ease) 1.2s both }
+/* ─── page load sequence ──────────────────────────────────
+   Nothing here is load-bearing for legibility: without the .intro class
+   every element below is already visible in its final position.          */
+.intro [data-fade]{ opacity:0; transform:translateY(18px) }
+.intro .hero__title .line > span{ transform:translateY(105%) }
+.intro .hero__media{ transform:scale(1.12) }
+.intro .cue{ opacity:0 }
+
+.intro-play .hero__media{ animation:sink 1.9s var(--ease) both }
+.intro-play .hero__title .line > span{ animation:lift 1.05s var(--ease) both }
+.intro-play .hero__title .line:nth-child(1) > span{ animation-delay:.30s }
+.intro-play .hero__title .line:nth-child(2) > span{ animation-delay:.42s }
+.intro-play .hero__title .line:nth-child(3) > span{ animation-delay:.54s }
+.intro-play [data-fade]{ animation:rise .9s var(--ease) both }
+.intro-play .hero .eyebrow[data-fade]{ animation-delay:.18s }
+.intro-play .hero__lede[data-fade]{ animation-delay:.70s }
+.intro-play .hero__actions[data-fade]{ animation-delay:.80s }
+.intro-play .dimmer[data-fade]{ animation-delay:1.05s }
+.intro-play .cue{ animation:rise .9s var(--ease) 1.2s both }
 
 @keyframes sink{ from{ transform:scale(1.12) } to{ transform:none } }
 @keyframes lift{ from{ transform:translateY(105%) } to{ transform:none } }
@@ -572,21 +605,27 @@ body.dim-touched .dimmer__hint{ opacity:0 }
     flex-direction:column-reverse; gap:8px;
   }
   .dimmer__plate{
-    flex-direction:row; align-items:center; gap:14px; padding:10px 16px;
-    background:color-mix(in oklab, var(--ink) 90%, transparent);
+    flex-direction:row; align-items:center; gap:11px; padding:8px 13px;
+    background:color-mix(in oklab, var(--ink) 93%, transparent);
   }
+  .dimmer__label{ font-size:9.5px; letter-spacing:.14em }
   .dimmer__slot{
     padding:9px 0;
     background:repeating-linear-gradient(to right, var(--hair) 0 1px, transparent 1px 14px);
   }
   .dimmer__rail{ writing-mode:horizontal-tb; direction:ltr;
-    width:min(150px,40vw); height:24px; cursor:ew-resize }
+    width:min(132px,34vw); height:24px; cursor:ew-resize }
   .dimmer__rail::-webkit-slider-runnable-track{ width:100%; height:3px }
   .dimmer__rail::-moz-range-track{ width:100%; height:3px }
   .dimmer__rail::-webkit-slider-thumb{ width:13px; height:26px;
     margin-left:0; margin-top:-11.5px }
   .dimmer__rail::-moz-range-thumb{ width:13px; height:26px }
-  .dimmer__read{ display:flex; gap:8px; align-items:baseline }
+  .dimmer__read{ display:flex; gap:7px; align-items:baseline; white-space:nowrap }
+  .dimmer__read i{ font-size:9px }
+
+  /* clear the docked plate so it never covers the buttons or the last row */
+  .hero{ padding-bottom:clamp(132px,30vw,172px) }
+  .foot__in{ padding-bottom:calc(clamp(38px,5vw,60px) + 74px) }
 }
 @media (max-width:560px){
   .service__shots{ grid-template-columns:1fr }

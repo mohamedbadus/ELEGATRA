@@ -37,8 +37,16 @@
       setLight(Number(rail.value));
       document.body.classList.add('dim-touched');
     });
-    // the hint gives up on its own if nobody touches it
-    setTimeout(function () { document.body.classList.add('dim-touched'); }, 9000);
+    // The hint has done its job the moment the reader engages with the page —
+    // past the hero it just floats over the content, so retire it on the first
+    // scroll, the first drag, or after a few seconds of nobody biting.
+    var retire = function () { document.body.classList.add('dim-touched'); };
+    window.addEventListener('scroll', function onFirst() {
+      if (window.scrollY < 80) return;
+      retire();
+      window.removeEventListener('scroll', onFirst);
+    }, { passive: true });
+    setTimeout(retire, 9000);
   }
 
   /* ── masthead state ─────────────────────────────────── */
@@ -111,6 +119,9 @@
   if (calm || !('IntersectionObserver' in window)) {
     targets.forEach(function (el) { el.classList.add('is-in'); });
   } else {
+    // Only hide them once we know the observer is about to run.
+    root.classList.add('reveal-ready');
+
     // stagger siblings so a grid lights up in order, not all at once
     var seen = new Map();
     targets.forEach(function (el) {
