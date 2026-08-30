@@ -70,6 +70,11 @@ values in square brackets:
 - Instagram — handle and the profile URL
 - Opening hours
 
+**The floating WhatsApp button has its own copy of the number.** Search for
+`<!-- WHATSAPP` near the bottom of `index.html` and change the number in that
+`href` too, or the button will message nobody. The pre-filled message text is in
+the same link and can be reworded.
+
 ## 5. Map
 
 Google Maps → find the shop → Share → **Embed a map** → copy the `<iframe>`.
@@ -80,3 +85,14 @@ match the dark page.
 
 - **Favicon**: add `assets/img/favicon.png` and a `<link rel="icon">` in `<head>`.
 - **Social preview**: add `og:image` meta tags once there is a hero photograph.
+
+## 7. When the site moves to its own domain
+
+Two absolute URLs in `<head>` point at the GitHub Pages address so link previews
+work when the site is shared on WhatsApp or Instagram. Search for `og:url` and
+`og:image` and update both, or the preview will keep pulling from the old
+address.
+
+The preview picture is currently `hero-1600.jpg`. Once there is a real
+photograph of the shop, point `og:image` at that instead — it is the image
+people see before they decide whether to tap the link.
