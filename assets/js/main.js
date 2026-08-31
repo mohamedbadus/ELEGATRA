@@ -179,6 +179,30 @@
     targets.forEach(function (el) { io.observe(el); });
   }
 
+  /* ── which section am I in? ─────────────────────────
+     A one-page site with a fixed nav should say where you are; without it
+     the four links are decoration.                                      */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var sections = links
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    var seenNow = new Set();
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) seenNow.add(e.target); else seenNow.delete(e.target);
+      });
+      // the topmost section currently crossing the band wins
+      var current = sections.filter(function (el) { return seenNow.has(el); })[0];
+      links.forEach(function (a) {
+        a.classList.toggle('is-current',
+          !!current && a.getAttribute('href') === '#' + current.id);
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    sections.forEach(function (el) { spy.observe(el); });
+  }
+
   /* ── parallax on the two full-bleed photographs ─────── */
   if (hasST) {
     [['.hero__pan', '.hero', -9], ['.band__pan', '.band', -13]].forEach(function (cfg) {
