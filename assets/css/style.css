@@ -18,6 +18,12 @@
   --prism-c:  #7FD9E8;   /* refraction fringe, cool edge */
   --prism-r:  #F2A0C8;   /* refraction fringe, warm edge */
 
+  /* A filament does not just get darker as it dims, it gets *redder*:
+     roughly 2700 K at full output down to about 1800 K at the bottom.
+     --warm is the inverse of the light, --flame the colour it burns at. */
+  --warm: calc(1 - var(--lum));
+  --flame: color-mix(in oklab, #FF8A2B, var(--candle) calc(var(--lum) * 100%));
+
   --linen-dim: color-mix(in oklab, var(--linen) 78%, transparent);
   --hair: color-mix(in oklab, var(--brass) 30%, transparent);
   --panel: #0E0C14;
@@ -57,9 +63,11 @@ img{ max-width:100%; display:block }
   --lit-gain:.88;
   filter:
     brightness(calc(var(--lit-floor) + var(--lum) * var(--lit-gain)))
-    saturate(calc(.58 + var(--lum) * .56))
-    contrast(calc(.92 + var(--lum) * .16));
-  transition:filter .16s linear;
+    saturate(calc(.62 + var(--lum) * .46 + var(--warm) * .22))
+    contrast(calc(.92 + var(--lum) * .16))
+    sepia(calc(var(--warm) * .34))
+    hue-rotate(calc(var(--warm) * -6deg));
+  /* no CSS transition: main.js eases --lum itself, with filament inertia */
 }
 
 .skip{
@@ -213,17 +221,15 @@ body.scrolled .masthead{
     rgb(11 10 16 / .97) 0%, rgb(11 10 16 / .92) 24%,
     rgb(11 10 16 / .74) 44%, rgb(11 10 16 / .34) 72%, transparent 100%);
   opacity:calc(.20 + var(--lum) * .80);
-  transition:opacity .16s linear;
 }
 /* warm bloom over the fixture — grows with the dimmer */
 .hero__bloom{
   position:absolute; left:50%; top:-14%; translate:-50% 0;
   width:min(1200px,130vw); aspect-ratio:1; pointer-events:none;
   background:radial-gradient(closest-side,
-    color-mix(in oklab, var(--candle) calc(var(--lum) * 34%), transparent),
+    color-mix(in oklab, var(--flame) calc(var(--lum) * var(--lum) * 46%), transparent),
     transparent 70%);
   mix-blend-mode:screen;
-  transition:background .16s linear;
 }
 /* constant scrim — legibility never depends on the dimmer */
 .hero__scrim{
@@ -310,8 +316,7 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
     color-mix(in oklab, var(--ink) 96%, transparent));
   border:1px solid color-mix(in oklab, var(--brass) 52%, transparent);
   backdrop-filter:blur(8px);
-  box-shadow:0 0 calc(var(--lum) * 44px) color-mix(in oklab, var(--candle) 14%, transparent);
-  transition:box-shadow .16s linear;
+  box-shadow:0 0 calc(var(--lum) * var(--lum) * 54px) color-mix(in oklab, var(--flame) 18%, transparent);
 }
 .dimmer__label,.dimmer__read{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.18em;
@@ -348,12 +353,12 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
   -webkit-appearance:none; appearance:none;
   width:26px; height:13px; margin-left:-11.5px; border-radius:1px;
   background:linear-gradient(180deg,var(--brass-lt),var(--brass));
-  box-shadow:0 0 calc(var(--lum) * 26px) color-mix(in oklab, var(--candle) 80%, transparent);
+  box-shadow:0 0 calc(var(--lum) * var(--lum) * 34px) color-mix(in oklab, var(--flame) 85%, transparent);
 }
 .dimmer__rail::-moz-range-thumb{
   width:26px; height:13px; border:0; border-radius:1px;
   background:linear-gradient(180deg,var(--brass-lt),var(--brass));
-  box-shadow:0 0 calc(var(--lum) * 26px) color-mix(in oklab, var(--candle) 80%, transparent);
+  box-shadow:0 0 calc(var(--lum) * var(--lum) * 34px) color-mix(in oklab, var(--flame) 85%, transparent);
 }
 
 /* ─── WhatsApp ──────────────────────────────────────────────
@@ -493,7 +498,6 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
     rgb(11 10 16 / .46) 66%, transparent 84%);
   opacity:calc(.40 + var(--lum) * .60);
   filter:blur(12px);
-  transition:opacity .16s linear;
 }
 .band .eyebrow,
 .hero .eyebrow{ color:var(--candle) }
@@ -675,6 +679,8 @@ body.dim-touched .dimmer__hint{ opacity:0; visibility:hidden }
   .dimmer__rail::-moz-range-thumb{ width:13px; height:26px }
   .dimmer__read{ display:flex; gap:7px; align-items:baseline; white-space:nowrap }
   .dimmer__read i{ font-size:9px }
+  /* kelvin says more about the light than lumens do; drop lumens for room */
+  .dimmer__read i:first-of-type{ display:none }
 
   /* clear the docked plate so it never covers the buttons or the last row */
   .hero{ padding-bottom:clamp(178px,40vw,220px) }

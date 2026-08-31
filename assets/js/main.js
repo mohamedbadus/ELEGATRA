@@ -17,26 +17,64 @@
   if (hasST) window.gsap.registerPlugin(window.ScrollTrigger);
 
   /* ── the dimmer ─────────────────────────────────────────
-     One control writes --lum. The stylesheet re-exposes every
-     photograph from it, so dragging this actually re-lights
-     the page rather than fading a decorative overlay.        */
+     One control writes --lum. The stylesheet re-exposes every photograph
+     from it, so dragging this re-lights the page rather than fading a
+     decorative overlay. Three things make it behave like real hardware:
+
+       1. a gamma curve, because light output is not linear in dial
+          position — a straight mapping puts all the visible change in
+          the bottom third, which is what a cheap dimmer feels like;
+       2. filament inertia, eased on a frame loop, warming faster than it
+          cools, so the glow lingers on the way down;
+       3. a colour temperature that falls with the output, which the
+          readout states in kelvin alongside the lumens.            */
   var rail = document.getElementById('dim');
   var read = document.getElementById('dimread');
-  var MAX_LUMENS = 3000;
 
-  function setLight(pct) {
-    root.style.setProperty('--lum', (pct / 100).toFixed(3));
+  var GAMMA = 1.6;          // dial position -> light output
+  var MAX_LUMENS = 3000;    // a large chandelier, all lamps up
+  var K_LOW = 1800, K_HIGH = 2700;
+
+  var target = 0, shown = 0, frame = null;
+
+  function output(pct) { return Math.pow(pct / 100, GAMMA); }
+
+  function label(lum) {
     if (!read) return;
-    read.innerHTML = '<b>' + pct + '%</b><i>' +
-      Math.round(pct / 100 * MAX_LUMENS).toLocaleString('en-US') + ' lm</i>';
+    read.innerHTML =
+      '<b>' + Math.round(Math.pow(lum, 1 / GAMMA) * 100) + '%</b>' +
+      '<i>' + Math.round(lum * MAX_LUMENS).toLocaleString('en-US') + ' lm</i>' +
+      '<i>' + (Math.round((K_LOW + lum * (K_HIGH - K_LOW)) / 50) * 50)
+                .toLocaleString('en-US') + ' K</i>';
+  }
+
+  function paint(lum) {
+    root.style.setProperty('--lum', lum.toFixed(4));
+    label(lum);
+  }
+
+  function tick() {
+    var gap = target - shown;
+    if (Math.abs(gap) < 0.0008) {
+      shown = target; paint(shown); frame = null; return;
+    }
+    // heats quicker than it cools, so the glow hangs on coming down
+    shown += gap * (gap > 0 ? 0.22 : 0.11);
+    paint(shown);
+    frame = requestAnimationFrame(tick);
   }
 
   if (rail) {
-    setLight(Number(rail.value));
+    target = shown = output(Number(rail.value));
+    paint(shown);
+
     rail.addEventListener('input', function () {
-      setLight(Number(rail.value));
+      target = output(Number(rail.value));
+      if (calm) { shown = target; paint(shown); }
+      else if (!frame) frame = requestAnimationFrame(tick);
       document.body.classList.add('dim-touched');
     });
+
     // The hint has done its job the moment the reader engages with the page —
     // past the hero it just floats over the content, so retire it on the first
     // scroll, the first drag, or after a few seconds of nobody biting.

@@ -27,24 +27,31 @@ Open <http://localhost:8000>. Stop it with `lsof -ti:8000 | xargs kill`.
 **The page is a light you can dim.** The brass dimmer — fixed to the right edge
 on desktop, docked to the bottom on a phone — writes one CSS custom property,
 `--lum`, onto `:root`. Every photograph carries `.lit`, which exposes it from
-that value:
+that value. Dragging it re-lights the room: it changes the exposure of the actual
+photographs, not a decorative overlay.
 
-```css
-.lit{
-  --lit-floor:.34; --lit-gain:.88;
-  filter: brightness(calc(var(--lit-floor) + var(--lum) * var(--lit-gain)))
-          saturate(calc(.58 + var(--lum) * .56))
-          contrast(calc(.92 + var(--lum) * .16));
-}
-```
+Four things make it behave like real hardware rather than a slider:
 
-So dragging it really re-lights the room — it changes the exposure of the actual
-photographs, and the warm bloom over the hero fixture grows with it. The readout
-shows the matching lumen figure, the way a dimmer plate does.
+**A gamma curve.** Light output is not linear in dial position. Mapping the two
+straight puts all the visible change in the bottom third, which is what a cheap
+dimmer feels like. Output is `position ^ 1.6`, so the range steps evenly.
 
-The floor and gain are per-image, because a photograph shot dark needs more
-headroom than one shot bright. The shade under the copy **rises with the light**
-too, so the type stays readable at every setting — verified at 6% and 100%.
+**Falling colour temperature.** A filament does not just get darker as it dims,
+it gets redder — roughly 2700 K at full down to about 1800 K at the bottom. The
+photographs warm through `sepia()` and `hue-rotate()` as the light drops, the
+bloom over the fixture burns at the colour the filament is currently running,
+and the readout states the kelvin figure alongside the lumens.
+
+**Filament inertia.** `--lum` is eased toward its target on a frame loop rather
+than snapped, warming faster than it cools, so the glow hangs on coming down.
+
+**Glare that grows with the square of the output**, the way real glare does, on
+both the bloom and the dimmer thumb.
+
+Per-photograph exposure floors (`--lit-floor`, `--lit-gain`) let a shot taken
+dark and one taken bright sit in the same row. The shade under the copy **rises
+with the light** too, so the type stays readable at every setting — verified at
+6% and 100%, desktop and phone.
 
 ## Design
 
